@@ -16,7 +16,7 @@ async function ServerLogin(email, senha) {
 
     const token = jwt.sign(
         { id: usuario.id },
-        'segredo',
+        'solano',
         { expiresIn: '1h' }
     );
 

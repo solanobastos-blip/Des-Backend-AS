@@ -7,12 +7,17 @@ const jwt = require('jsonwebtoken');
 
 const loginController = require('../controllers/controller');
 const jogosController = require('../controllers/controller');
+const palpitesController = require('../controllers/controller');
+const authMiddleware = require('../middleware/authMiddleware');
 
 // Rota Pública para logar
 routes.post('/login', loginController.login);
 
 // Rota de listagem de jogos
 routes.get('/api/jogos', jogosController.listarJogos);
+
+// Registrar novo palpite
+routes.post("/api/palpites", authMiddleware, palpitesController.criarPalpite);
 
 // Rota de teste simples para verificar se a API está no ar
 routes.get('/', (req, res) => {
