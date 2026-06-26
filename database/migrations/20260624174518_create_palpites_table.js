@@ -7,7 +7,6 @@ exports.up = function (knex) {
 
         table.increments('id').primary();
 
-        //chave estrangeira para a tabela de usuários, ele busca na outra tabela o id do usuário que fez o palpite
         table.integer('usuario_id')
             .unsigned()
             .notNullable()

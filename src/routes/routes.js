@@ -5,19 +5,26 @@ const db = require('../connection');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const loginController = require('../controllers/controller');
-const jogosController = require('../controllers/controller');
-const palpitesController = require('../controllers/controller');
+const controller = require('../controllers/controller');
 const authMiddleware = require('../middleware/authMiddleware');
 
 // Rota Pública para logar
-routes.post('/login', loginController.login);
+routes.post('/login', controller.login);
 
 // Rota de listagem de jogos
-routes.get('/api/jogos', jogosController.listarJogos);
+routes.get('/api/jogos', controller.listarJogos);
 
 // Registrar novo palpite
-routes.post("/api/palpites", authMiddleware, palpitesController.criarPalpite);
+routes.post("/api/palpites", authMiddleware, controller.criarPalpite);
+
+// Listar meus palpites
+routes.get('/api/verpalpites', authMiddleware, controller.listarMeusPalpites);
+
+// Atualizr palpite pelo ID do palpite
+routes.put('/api/palpites/:id', authMiddleware, controller.atualizarMeusPalpites);
+
+// Deletar meu palpite pelo id do palpite
+routes.delete('/api/deletarpalpite/:id', authMiddleware, controller.deletarMeuPalpite);
 
 // Rota de teste simples para verificar se a API está no ar
 routes.get('/', (req, res) => {
